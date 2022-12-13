@@ -7,6 +7,7 @@ from matplotlib import pyplot as plt
 
 def get_contours(image):
     img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    
     img = cv2.GaussianBlur(img, (3, 3), cv2.BORDER_DEFAULT)
 
     edges = cv2.Canny(img,60,105)
@@ -14,13 +15,20 @@ def get_contours(image):
     
     #plt.imshow(edges, cmap='gray')
     contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    contours = list(filter(lambda x: cv2.contourArea(x) > 300,contours))
+    contours = list(filter(lambda x: cv2.contourArea(x) > 400,contours))
     #contours, _ = cv2.findContours(edge, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     return contours
 
 def sort_contours(cnts):
     pass
 
+def decreaseSize(imgGray):
+        scalePercent = 20 / 100  # Сократить размер изображение в 80%
+        width = int(imgGray.shape[1] * scalePercent)
+        height = int(imgGray.shape[0] * scalePercent)
+        dim = (width, height)
+        gray = cv2.resize(imgGray, dim)
+        return gray
 
 
 def load_images(path):
