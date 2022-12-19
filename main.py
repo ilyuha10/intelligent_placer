@@ -20,7 +20,7 @@ i=0
 j = 0
 count = 0
 for im in images:
-    if name[i]!='24.jpg':
+    if name[i]!='19.jpg':
         i+=1
         continue
     with open('data.csv', newline='', encoding='utf-8') as csvfile:

@@ -14,12 +14,12 @@ def create_polygons(poly_cnt:np.ndarray, objects_cnt:list[np.ndarray])->tuple[Po
     #загущаются точки и алгоритм с бОльшей долей вероятности уложит той предмет той стороной, на которой
     #произошло загущение
     p1 = [tuple(p) for p in poly_cnt[:, 0]]
-    poly = Polygon(p1).simplify(5)
+    poly = Polygon(p1).simplify(POLYGON_SIMPLIFY)
     
     objs = []
     for o in objects_cnt:
         o1 = [tuple(p) for p in o[:, 0]]
-        objs.append(Polygon(o1).simplify(3))
+        objs.append(Polygon(o1).simplify(OBJECT_SIMPLIFY))
     objs.sort(key=lambda x: x.area, reverse=True) 
     return poly, objs
 
